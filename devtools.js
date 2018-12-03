@@ -1,22 +1,32 @@
 
-chrome.devtools.panels.create('IndexedDB My Admin', '', 'devtools.html', panel => {
-	// window.addEventListener('message', event => {
-  //   console.log('extension-indexeddb-my-admin: content.js', event);
-  // });
+chrome.devtools.panels.create('IndexedDB My Admin', '', 'devtools.html', function(panel) {
+	const form = document.querySelector('form');
+  const submit = form.querySelector('[name="submit"]');
+  const database = form.querySelector('[name="database"]');
+  const version = form.querySelector('[name="version"]');
+  const objectName = form.querySelector('[name="object_name"]');
 
-  console.log('its ok', Date.now(), chrome.browsingData);
+
+  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+    // Send
+    //
+    submit.addEventListener('click', () => {
+      const action = {
+        action: 'GET_CURSOR_ALL',
+        data: {
+          database: database.value,
+          version: version.valueAsNumber,
+          objectName: objectName.value,
+        },
+      };
+
+      chrome.tabs.sendMessage(tabs[0].id, {action});
+    });
+
+    // Receive
+    //
+    chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+      console.log(request);
+    });
+  });
 });
-
-
-// chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-//         var port = chrome.tabs.connect(tabs[0].id,{name: "extension_request"});
-//             port.postMessage({db: "database_name_example"}); // send database name
-//             port.onMessage.addListener(function(msg) {
-//               if (msg.foo ) {
-//                // do your stuff in extension
-//               }
-//            }
-// }
-
-
-

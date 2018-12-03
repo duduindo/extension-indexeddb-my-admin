@@ -3,7 +3,7 @@
   <head>
     <style>
       :root {
-        background-color: lightgrey;
+        background-color: silver;
       }
 
       button {
@@ -15,11 +15,17 @@
     </style>
   </head>
   <body>
-    <div id="buttonDiv">
-    </div>
-    <div>
-      <p>Hello, Panel!</p>
-    </div>
+    <form action=".">
+      <fieldset>
+        <input  type="text"  name="database"    placeholder="Database" value="gih-reservations"> <br>
+        <input type="number" name="version"     placeholder="Version" value="2"> <br>
+        <input type="text"   name="object_name" placeholder="Object name" value="reservations"> <br>
+      </fieldset>
+
+      <fieldset>
+        <input type="button" value="Send" name="submit">
+      </fieldset>
+    </form>
 
     <script src="devtools.js"></script>
   </body>

@@ -2,7 +2,7 @@
 	"name": "IndexedDB My Admin",
 	"version": "1.0",
 	"description": "Manager IndexedDB",
-	"permissions": ["activeTab", "declarativeContent", "storage", "tabs"],
+	"permissions": [],
 	"background": {
 		"scripts": ["background.js"],
 		"persistent": false
@@ -10,7 +10,7 @@
 	"devtools_page": "devtools.html",
   "content_scripts": [
     {
-      "matches": ["http://localhost/*"],
+      "matches": ["<all_urls>"],
       "js": ["content.js"],
       "run_at": "document_end"
     }
