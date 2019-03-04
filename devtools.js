@@ -1,30 +1,25 @@
 
 chrome.devtools.panels.create('IndexedDB My Admin', '', 'devtools.html', function(panel) {
-	const form = document.querySelector('form');
-  const submit = form.querySelector('[name="submit"]');
-  const database = form.querySelector('[name="database"]');
-  const version = form.querySelector('[name="version"]');
-  const objectName = form.querySelector('[name="object_name"]');
+	const button = document.querySelector('button');
+
 
 
   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-    // Send
-    //
-    submit.addEventListener('click', () => {
-      const action = {
-        action: 'GET_CURSOR_ALL',
-        data: {
-          database: database.value,
-          version: version.valueAsNumber,
-          objectName: objectName.value,
-        },
-      };
+    const local = localStorage.getItem('local');
 
-      chrome.tabs.sendMessage(tabs[0].id, {action});
-    });
+    button.onclick = () => {
+      chrome.tabs.sendMessage(tabs[0].id, 'opa');
+    };
 
-    // Receive
-    //
+    button.textContent += Date.now();
+
+    if (local) {
+      console.warn('Existe item "local"');
+    } else {
+      localStorage.setItem('local', 'STORAGE');
+    }
+
+
     chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
       console.log(request);
     });
