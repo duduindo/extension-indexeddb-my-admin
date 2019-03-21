@@ -5,29 +5,17 @@
       :root {
         background-color: silver;
       }
-
-      button {
-        height: 30px;
-        width: 30px;
-        outline: none;
-        margin: 10px;
-      }
     </style>
   </head>
   <body>
-    <form action=".">
-      <fieldset>
-        <input  type="text"  name="database"    placeholder="Database" value="gih-reservations"> <br>
-        <input type="number" name="version"     placeholder="Version" value="2"> <br>
-        <input type="text"   name="object_name" placeholder="Object name" value="reservations"> <br>
-      </fieldset>
+    <div id="app"></div>
 
-      <fieldset>
-        <input type="button" value="Send" name="submit">
-      </fieldset>
-    </form>
+    <script src="src/library/vuejs-v2.6.9.js"></script>
+    <script src="src/library/vue-router-v3.0.2.js"></script>
+    <script src="src/library/vuex-v3.1.0.js"></script>
+    <script src="src/library/vuex-router-sync-v5.0.0.js"></script>
 
-    <script src="devtools.js"></script>
+    <script type="module" src="devtools.js"></script>
   </body>
 
 </html>
