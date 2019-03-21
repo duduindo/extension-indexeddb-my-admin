@@ -24,7 +24,6 @@ sync(store, router)
 const app = new Vue({
   router,
   store,
-  components: {Expander},
   render(createElement) {
     return createElement('div', {}, [
       createElement('h1', 'Hello world!'),
