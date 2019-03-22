@@ -5,16 +5,31 @@
 const {mapActions, mapGetters} = Vuex
 
 
+const List = Vue.component('list', {
+  props: {
+    tree: {
+      type: Array,
+      required: true,
+      default: []
+    },
+  },
+  render(createElement) {
+    return createElement('ul', this.tree.map(database => {
+      return createElement('li', `${database.name}: ${database.version}`)
+    }))
+  }
+})
+
+
 const Expander = Vue.component('expander', {
   render(createElement) {
-    console.log(this.tree)
-
-    /**
-     * Example FOREACH: https://br.vuejs.org/v2/guide/render-function.html#v-if-e-v-for
-     */
-
-    return createElement('h2', 'Expander\'s here')
+    return createElement(List, {
+      props: {
+        tree: this.tree
+      }
+    })
   },
+  components: {List},
   computed: {
     ...mapGetters({
       databases: 'getDatabases',
@@ -36,9 +51,7 @@ const Expander = Vue.component('expander', {
       })
     })
   }
-
 })
-
 
 
 export default Expander
