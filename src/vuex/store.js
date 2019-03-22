@@ -1,9 +1,9 @@
-import databases from './modules/databases/index.js'
+import tab from './modules/tab/index.js'
 import tree from './modules/tree/index.js'
 
 export default {
   modules: {
-    databases,
+    tab,
     tree
   },
   strict: true

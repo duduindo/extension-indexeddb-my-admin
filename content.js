@@ -117,6 +117,10 @@ class IndexedDBAdmin {
       openCursor.onerror = reject;
     });
   }
+
+  async getHost() {
+    return window.location.host;
+  }
 }
 
 
@@ -137,6 +141,10 @@ class Commands {
 
       case 'GET_DATABASE_TREE':
         return request.getDatabaseTree(payload.store);
+        break;
+
+      case 'GET_HOST':
+        return request.getHost();
         break;
 
       default:

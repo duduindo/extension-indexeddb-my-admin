@@ -13,17 +13,17 @@ const List = Vue.component('list', {
       default: []
     },
   },
-  render(createElement) {
-    return createElement('ul', this.tree.map(database => {
-      return createElement('li', `${database.name}: ${database.version}`)
+  render(create) {
+    return create('ul', this.tree.map(database => {
+      return create('li', `${database.name}: ${database.version}`)
     }))
   }
 })
 
 
 const Expander = Vue.component('expander', {
-  render(createElement) {
-    return createElement(List, {
+  render(create) {
+    return create(List, {
       props: {
         tree: this.tree
       }
