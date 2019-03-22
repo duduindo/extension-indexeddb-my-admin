@@ -35,12 +35,33 @@ chrome.devtools.panels.create('IndexedDB My Admin', '', 'devtools.html', functio
         store,
         components: {Expander},
         render(createElement) {
-          return createElement('div', {}, [
-            createElement('h1', 'Hello world!'),
-            createElement(Expander)
+          // <div>
+          return createElement('div', {
+            class: 'l-container',
+            id: 'app'
+          }, [
+            // <aside>
+            createElement('aside', {
+              class: 'l-aside'
+            }, [
+              createElement('h3', 'logo'),
+              createElement(Expander)
+            ]),
+
+            // <header>
+            createElement('header', 'header text', {
+              class: 'l-masthead'
+            }),
+
+            // <main>
+            createElement('main', {
+              class: 'l-main'
+            }, [ createElement('router-view') ])
           ])
         },
-        mounted() {}
+        mounted() {
+          console.log(this)
+        }
       }).$mount('#app')
     }
   });
