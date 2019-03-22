@@ -124,26 +124,32 @@ class IndexedDBAdmin {
 }
 
 
+class Tab {
+  getHost() {
+    return window.location.host;
+  }
+}
+
 
 class Commands {
   reducer(action) {
-    const { type, payload } = action;
-    const request = new IndexedDBAdmin(payload.name, payload.version);
+    let request = null;
+    const { type, payload = {} } = action;
+
+    if (type.match('GET_DATABASE')) {
+      request = new IndexedDBAdmin(payload.name, payload.version);
+    }
+
+    if (type.match('GET_TAB')) {
+      request = new Tab();
+    }
 
     switch(action.type) {
-      case 'GET_STORE_NAMES_TO_ARRAY':
-        return request.getStoreNamesToArray();
-        break;
-
-      case 'GET_ALL_OBJECT_STORE':
-        return request.getAllFromObjectStore(payload.store);
-        break;
-
       case 'GET_DATABASE_TREE':
         return request.getDatabaseTree(payload.store);
         break;
 
-      case 'GET_HOST':
+      case 'GET_TAB_HOST':
         return request.getHost();
         break;
 
@@ -153,7 +159,7 @@ class Commands {
   }
 
   async exec(action) {
-    if (action['type'] || action['payload']['name'] || action['payload']['version']) {
+    if (action['type']) {
       try {
         return await this.reducer(action);
       } catch(err) {

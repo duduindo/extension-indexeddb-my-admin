@@ -5,8 +5,6 @@ export default {
 
     // Listener
     chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-      console.log(request)
-
       context.dispatch('setTree', request)
     });
   },

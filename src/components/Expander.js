@@ -22,13 +22,6 @@ const List = Vue.component('list', {
 
 
 const Expander = Vue.component('expander', {
-  render(create) {
-    return create(List, {
-      props: {
-        tree: this.tree
-      }
-    })
-  },
   components: {List},
   computed: {
     ...mapGetters({
@@ -49,6 +42,13 @@ const Expander = Vue.component('expander', {
         name: database.name,
         version: database.version
       })
+    })
+  },
+  render(create) {
+    return create(List, {
+      props: {
+        tree: this.tree
+      }
     })
   }
 })

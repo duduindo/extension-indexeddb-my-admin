@@ -1,10 +1,24 @@
 import Expander from './components/Expander.js'
 
+const {mapActions, mapGetters} = Vuex
+
 
 const App = Vue.component('app', {
   components: {Expander},
+  computed: {
+    ...mapGetters({
+      host: 'getHost',
+    })
+  },
+  methods: {
+    ...mapActions({
+      fetch: 'fetchHost'
+    })
+  },
+  mounted() {
+    this.fetch()
+  },
   render(create) {
-    // <div>
     return create('div', {
       class: 'l-container',
       id: 'app'
