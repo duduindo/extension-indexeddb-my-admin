@@ -1,10 +1,10 @@
 export default {
   getTree: state => state.tree,
-  getDatabases: state => {
+  getDatabases: (state, context) => {
     const { databases } = state
-    const { host } = window.location
-    const context = databases.filter(database => database.host === host)
+    const host = context.getHost
+    const databasesFiltered = databases.filter(database => database.host === host)
 
-    return context
+    return databasesFiltered
   }
 }

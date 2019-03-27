@@ -27,6 +27,7 @@ const Expander = Vue.component('expander', {
     ...mapGetters({
       databases: 'getDatabases',
       tree: 'getTree'
+
     })
   },
   methods: {
@@ -34,15 +35,15 @@ const Expander = Vue.component('expander', {
       fetch: 'fetchTree'
     })
   },
-  mounted() {
-    const { databases } = this
-
-    databases.forEach(database => {
-      this.fetch({
-        name: database.name,
-        version: database.version
+  watch: {
+    databases(filtered) {
+      filtered.forEach(database => {
+        this.fetch({
+          name: database.name,
+          version: database.version
+        })
       })
-    })
+    }
   },
   render(create) {
     return create(List, {

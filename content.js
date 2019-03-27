@@ -117,10 +117,6 @@ class IndexedDBAdmin {
       openCursor.onerror = reject;
     });
   }
-
-  async getHost() {
-    return window.location.host;
-  }
 }
 
 
@@ -132,38 +128,71 @@ class Tab {
 
 
 class Commands {
-  reducer(action) {
-    let request = null;
-    const { type, payload = {} } = action;
+  constructor(props) {
+    this.action = {}
+  }
 
-    if (type.match('GET_DATABASE')) {
-      request = new IndexedDBAdmin(payload.name, payload.version);
-    }
+  async handleIndexedDB() {
+    const { type, payload } = this.action
+    const request = new IndexedDBAdmin(payload.name, payload.version)
 
-    if (type.match('GET_TAB')) {
-      request = new Tab();
-    }
-
-    switch(action.type) {
+    switch(type) {
       case 'GET_DATABASE_TREE':
         return request.getDatabaseTree(payload.store);
         break;
 
+      default:
+        throw new Error('Error default command');
+    }
+
+    return request
+  }
+
+  async handleTab() {
+    const { type, payload } = this.action
+    const request = new Tab()
+
+    switch(type) {
       case 'GET_TAB_HOST':
         return request.getHost();
         break;
 
       default:
-        return 'Error default command';
+        throw new Error('Error default command');
     }
+
+    return request
+  }
+
+  reducer() {
+    const { type } = this.action
+    let request = null
+
+    if (type.startsWith('GET_DATABASE')) {
+      request = this.handleIndexedDB()
+    }
+
+    if (type.startsWith('GET_TAB')) {
+      request = this.handleTab()
+    }
+
+    return request
   }
 
   async exec(action) {
+    this.action = action
+
     if (action['type']) {
       try {
-        return await this.reducer(action);
+        return {
+          type: action.type,
+          data: await this.reducer(action)
+        }
       } catch(err) {
-        console.error(err);
+        return {
+          type: 'ERROR',
+          data: null
+        }
       }
     }
   }

@@ -5,11 +5,6 @@ const {mapActions, mapGetters} = Vuex
 
 const App = Vue.component('app', {
   components: {Expander},
-  computed: {
-    ...mapGetters({
-      host: 'getHost',
-    })
-  },
   methods: {
     ...mapActions({
       fetch: 'fetchHost'
