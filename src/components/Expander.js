@@ -23,11 +23,16 @@ const List = Vue.component('list', {
 
 const Expander = Vue.component('expander', {
   components: {List},
+  data() {
+    return {
+      databasesFiltered: []
+    }
+  },
   computed: {
     ...mapGetters({
-      databases: 'getDatabases',
-      tree: 'getTree'
-
+      filter: 'filterDatabases',
+      tree: 'getTree',
+      host: 'getHost'
     })
   },
   methods: {
@@ -36,8 +41,15 @@ const Expander = Vue.component('expander', {
     })
   },
   watch: {
-    databases(filtered) {
-      filtered.forEach(database => {
+    host(value, oldValue) {
+      if (value !== oldValue) {
+        this.databasesFiltered = this.filter(value)
+      }
+    },
+    databasesFiltered(value) {
+      const databases = value
+
+      databases.forEach(database => {
         this.fetch({
           name: database.name,
           version: database.version

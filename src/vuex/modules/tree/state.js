@@ -12,6 +12,11 @@ export default {
       version: 10
     },
     {
+      host: 'localhost:8443',
+      name: 'database1',
+      version: 2
+    },
+    {
       host: 'www.google.com',
       name: 'database-google',
       version: 845
