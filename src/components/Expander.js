@@ -15,7 +15,24 @@ const List = Vue.component('list', {
   },
   render(create) {
     return create('ul', this.tree.map(database => {
-      return create('li', `${database.name}: ${database.version}`)
+      return create('li', [
+          // Database
+          create('router-link',  { props: {to: `/database/${database.name}/${database.version}/`}}, database.name),
+
+          // Stores
+          create('ul', database.stores.map(store => {
+            return create('li', [
+              create('router-link',  { props: {to: `/store/${database.name}/${database.version}/${store.name}/`}}, store.name),
+
+              // Indexes
+              create('ul', store.indexes.map(index => {
+                return create('li', [
+                  create('router-link',  { props: {to: `/store/${database.name}/${database.version}/${store.name}/${index}/`}}, index)
+                ])
+              }))
+            ])
+          }))
+        ])
     }))
   }
 })
