@@ -1,5 +1,7 @@
 export default {
   fetchTree(context, value) {
-    chrome.tabs.sendMessage(window.tabId, {type: 'GET_DATABASE_TREE', payload: value});
+    const id = context.getters.getID
+
+    chrome.tabs.sendMessage(id, {type: 'GET_DATABASE_TREE', payload: value});
   }
 }

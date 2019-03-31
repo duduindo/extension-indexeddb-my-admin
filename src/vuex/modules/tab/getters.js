@@ -1,3 +1,4 @@
 export default {
-  getHost: state => state.host
+  getHost: state => state.host,
+  getID: state => state.id
 }

@@ -4,22 +4,28 @@
 
 function createOnMessagePlugin(onMessage) {
   return store => {
-    onMessage.addListener(request => {
-      const { data, origin: host, type } = request
+    onMessage.addListener((request, tab) => {
+      const { data, type } = request
+      const idExtension = store.getters.getID
+      const idTab = tab.tab.id
+
+      if (idExtension !== idTab) {
+        return;
+      }
 
       switch (type) {
         case 'GET_TAB_HOST':
-          store.commit('SET_HOST', { data, host })
+          store.commit('SET_HOST', data)
           break
 
         case 'GET_DATABASE_TREE':
-          store.commit('SET_TREE', { data, host })
+          store.commit('SET_TREE', data)
           break
       }
     });
 
     store.subscribe(mutation => {
-      console.log('Plugin. Mutation type: ', mutation.type)
+      // console.log('Plugin. Mutation type: ', mutation.type)
     })
   }
 }

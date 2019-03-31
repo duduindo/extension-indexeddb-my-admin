@@ -1,3 +1,4 @@
 export default {
-  host: null
+  host: null,
+  id: null
 }

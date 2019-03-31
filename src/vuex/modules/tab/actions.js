@@ -1,5 +1,7 @@
 export default {
   fetchHost: (context, value) => {
-    chrome.tabs.sendMessage(window.tabId, {type: 'GET_TAB_HOST'});
+    const id = context.getters.getID
+
+    chrome.tabs.sendMessage(id, {type: 'GET_TAB_HOST'});
   }
 }

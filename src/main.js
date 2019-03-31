@@ -8,13 +8,11 @@ Vue.use(Vuex)
 // Vuex
 const store = new Vuex.Store(Store)
 
-
-// Route
+// Router
 const router = new VueRouter({
   routes,
   mode: 'hash'
 })
-
 
 // Sync
 sync(store, router)
@@ -22,12 +20,13 @@ sync(store, router)
 
 // Panel
 chrome.devtools.panels.create('IndexedDB My Admin', '', 'devtools.html', function(panel) {
+
   // Tabs
   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-    const hasTab = tabs.length;
+    const hasTab = tabs.length
 
     if (hasTab) {
-      window.tabId = tabs[0].id
+      store.commit('SET_ID', tabs[0].id)
 
       // Vue
       new Vue({

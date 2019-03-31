@@ -1,7 +1,8 @@
 export default {
   SET_HOST: (state, value) => {
-    const { data, host } = value
-
-    state.host = data
+    state.host = value
+  },
+  SET_ID: (state, value) => {
+    state.id = value
   }
 }
