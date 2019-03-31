@@ -17,6 +17,11 @@ export default {
       version: 2
     },
     {
+      host: 'www.oantagonista.com',
+      name: 'ONE_SIGNAL_SDK_DB',
+      version: 1
+    },
+    {
       host: 'www.google.com',
       name: 'database-google',
       version: 845

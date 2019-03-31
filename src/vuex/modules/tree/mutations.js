@@ -1,9 +1,12 @@
 export default {
   SET_TREE: (state, value) => {
-    const { name, version, stores } = value || {}
+    const { data, host } = value
+    const { name, version, stores } = data || {}
+
+    console.log(opt)
 
     if (name && version && stores) {
-      state.tree.push(value)
+      state.tree.push(data)
     }
   }
 }

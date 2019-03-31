@@ -17,7 +17,7 @@ const List = Vue.component('list', {
     return create('ul', this.tree.map(database => {
       return create('li', [
           // Database
-          create('router-link',  {props: {to: `/database/${database.name}/${database.version}/`}}, database.name),
+          create('p', database.name),
 
           // Stores
           create('ul', database.stores.map(store => {

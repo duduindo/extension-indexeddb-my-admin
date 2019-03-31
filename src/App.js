@@ -23,7 +23,7 @@ const App = Vue.component('app', {
       create('aside', {
         class: 'l-aside'
       }, [
-        create('h3', 'logo'),
+        create('router-link', {props: { to: '/' }}, 'Go to index'),
         create(Expander)
       ]),
 
