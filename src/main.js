@@ -19,7 +19,7 @@ sync(store, router)
 
 
 // Panel
-chrome.devtools.panels.create('IndexedDB My Admin', '', 'devtools.html', function(panel) {
+chrome.devtools.panels.create('IndexedDBMyAdmin', '', 'devtools.html', function(panel) {
 
   // Tabs
   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
