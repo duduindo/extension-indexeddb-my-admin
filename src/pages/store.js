@@ -17,7 +17,11 @@ const Table = Vue.component('list', {
       // <thead>
       create('thead', [
         create('tr', [
-          create('th', 'Actions'),
+          create('th', {
+            attrs: {
+              colspan: 4
+            }
+          }, 'Actions'),
           create('th', '#'),
           create('th', `Key (key path: "${keyPath}")`),
           create('th', 'Value')
@@ -29,7 +33,38 @@ const Table = Vue.component('list', {
         const json = JSON.stringify(value)
 
         return create('tr', [
-          create('td', 'Actionss'),
+          // Checkbox
+          create('td', [
+            create('input', {
+              attrs: {
+                type: 'checkbox'
+              }
+            })
+          ]),
+          // Edit
+          create('td', [
+            create('a', {
+              attrs: {
+                href: '#Edit'
+              }
+            }, 'Edit')
+          ]),
+          // Copy
+          create('td', [
+            create('a', {
+              attrs: {
+                href: '#Copy'
+              }
+            }, 'Copy')
+          ]),
+          // Delete
+          create('td', [
+            create('a', {
+              attrs: {
+                href: '#Delete'
+              }
+            }, 'Delete')
+          ]),
           create('td', index),
           create('td', keys[index]),
           create('td', json)
