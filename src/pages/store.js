@@ -11,7 +11,7 @@ const Table = Vue.component('list', {
     },
   },
   render(create) {
-    const { values = [], keys = [] } = this.store
+    const { values = [], keys = [], keyPath = '' } = this.store
 
     return create('table', [
       // <thead>
@@ -19,7 +19,7 @@ const Table = Vue.component('list', {
         create('tr', [
           create('th', 'Actions'),
           create('th', '#'),
-          create('th', 'Key (key path: "id")'),
+          create('th', `Key (key path: "${keyPath}")`),
           create('th', 'Value')
         ])
       ]),
