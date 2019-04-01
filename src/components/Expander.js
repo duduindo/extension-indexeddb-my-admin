@@ -54,7 +54,8 @@ const Expander = Vue.component('expander', {
   },
   methods: {
     ...mapActions({
-      fetch: 'fetchTree'
+      fetch: 'fetchTree',
+      fetchStore: 'fetchStore'
     })
   },
   watch: {
@@ -72,6 +73,13 @@ const Expander = Vue.component('expander', {
           version: database.version
         })
       })
+    },
+    '$route'(to) {
+      const storeMatched = to.fullPath.match(/^\/store\/(?<name>.*)\/(?<version>\d{1,})\/(?<store>\w{1,})/)
+
+      if (storeMatched) {
+        this.fetchStore({...storeMatched.groups})
+      }
     }
   },
   render(create) {

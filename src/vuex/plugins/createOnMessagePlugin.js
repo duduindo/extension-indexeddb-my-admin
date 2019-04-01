@@ -18,6 +18,10 @@ function createOnMessagePlugin(onMessage) {
           store.commit('SET_HOST', data)
           break
 
+        case 'GET_DATABASE_STORE':
+          store.commit('SET_STORE', data)
+          break
+
         case 'GET_DATABASE_TREE':
           store.commit('SET_TREE', data)
           break
@@ -25,7 +29,7 @@ function createOnMessagePlugin(onMessage) {
     });
 
     store.subscribe(mutation => {
-      // console.log('Plugin. Mutation type: ', mutation.type)
+      console.log('Plugin. Mutation type: ', mutation.type)
     })
   }
 }
