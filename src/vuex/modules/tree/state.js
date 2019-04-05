@@ -25,6 +25,16 @@ export default {
       host: 'www.google.com',
       name: 'database-google',
       version: 845
+    },
+    {
+      host: 'jsperf.com', // https://jsperf.com/indexeddb-vs-localstorage/69
+      name: 'IDBWrapper-jsperfteststore',
+      version: 1
+    },
+    {
+      host: 'jsperf.com', // https://jsperf.com/indexeddb-vs-localstorage/69
+      name: 'IDBWrapper-perf',
+      version: 1
     }
   ],
 
