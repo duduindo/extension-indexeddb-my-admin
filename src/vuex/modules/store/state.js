@@ -1,3 +1,4 @@
 export default {
-  store: {}
+  store: {},
+  storeFiltered: {}
 }

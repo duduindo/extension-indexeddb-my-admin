@@ -1,5 +1,6 @@
-import Database from './pages/database.js'
-import Store from './pages/store.js'
+import Database from './pages/Database.js'
+import Store from './pages/Store.js'
+import HeaderStore from './components/HeaderStore.js'
 
 
 const Test = Vue.component('Test', {
@@ -22,7 +23,10 @@ export const routes = [
   },
   {
     path: '/store/:database/:version/:store/',
-    component: Store,
+    components: {
+      default: Store,
+      header: HeaderStore
+    },
     children: []
   }
 ]

@@ -1,3 +1,4 @@
 export default {
-  getStore: state => state.store,
+  getStoreFull: state => state.store,
+  getStore: state => state.storeFiltered,
 }

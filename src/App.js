@@ -28,9 +28,15 @@ const App = Vue.component('app', {
       ]),
 
       // <header>
-      create('header', 'header text', {
+      create('header', {
         class: 'l-masthead'
-      }),
+      }, [
+        create('router-view', {
+          props: {
+            name: 'header'
+          }
+        })
+      ]),
 
       // <main>
       create('main', {
