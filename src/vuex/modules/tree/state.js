@@ -35,6 +35,11 @@ export default {
       host: 'jsperf.com', // https://jsperf.com/indexeddb-vs-localstorage/69
       name: 'IDBWrapper-perf',
       version: 1
+    },
+    {
+      host: 'www.netflix.com',
+      name: 'netflix.player',
+      version: 1
     }
   ],
 

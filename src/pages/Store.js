@@ -67,7 +67,12 @@ const Table = Vue.component('list', {
           ]),
           create('td', index),
           create('td', keys[index]),
-          create('td', json)
+          create('vue-json-pretty', {
+            props: {
+              path: 'opa',
+              data: value
+            }
+          })
         ])
       }))
     ])

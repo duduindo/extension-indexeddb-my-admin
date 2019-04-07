@@ -2,8 +2,10 @@ import { routes } from './router-config.js'
 import App from './App.js'
 import Store from './vuex/store.js'
 
+
 Vue.use(VueRouter)
 Vue.use(Vuex)
+Vue.component('vue-json-pretty', VueJsonPretty.default)
 
 // Vuex
 const store = new Vuex.Store(Store)
