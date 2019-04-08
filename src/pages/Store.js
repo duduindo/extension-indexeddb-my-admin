@@ -4,14 +4,27 @@ const {mapActions, mapGetters} = Vuex
 
 const Table = Vue.component('list', {
   props: {
+    database: {
+      type: String,
+      required: true
+    },
+    version: {
+      type: [String, Number],
+      required: true
+    },
     store: {
+      type: String,
+      required: true
+    },
+    objectStore: {
       type: Object,
       required: true,
       default: { keyPath: null, keys: [], values: [] }
     },
   },
   render(create) {
-    const { values = [], keys = [], keyPath = '' } = this.store
+    const { values = [], keys = [], keyPath = '' } = this.objectStore
+    const { database, version, store } = this
 
     return create('table', [
       // <thead>
@@ -29,9 +42,7 @@ const Table = Vue.component('list', {
       ]),
 
       // <tbody>
-      create('tbody', values.map((value, index) => {
-        const json = JSON.stringify(value)
-
+      create('tbody', values.map((cursor, index) => {
         return create('tr', [
           // Checkbox
           create('td', [
@@ -43,9 +54,14 @@ const Table = Vue.component('list', {
           ]),
           // Edit
           create('td', [
-            create('a', {
-              attrs: {
-                href: '#Edit'
+            create('router-link', {
+              props: {
+                to: {
+                  path: `/edit/store/${database}/${version}/${store}/`,
+                  query: {
+                    cursor
+                  }
+                },
               }
             }, 'Edit')
           ]),
@@ -70,7 +86,7 @@ const Table = Vue.component('list', {
           create('vue-json-pretty', {
             props: {
               path: 'opa',
-              data: value
+              data: cursor
             }
           })
         ])
@@ -84,7 +100,7 @@ const Store = Vue.component('Store', {
   components: {Table},
   computed: {
     ...mapGetters({
-      store: 'getStore',
+      objectStore: 'getStore',
     })
   },
   methods: {
@@ -104,7 +120,10 @@ const Store = Vue.component('Store', {
   render(create) {
     return create(Table, {
       props: {
-        store: this.store
+        database: this.$route.params.database,
+        version: this.$route.params.version,
+        store: this.$route.params.store,
+        objectStore: this.objectStore
       }
     })
   }

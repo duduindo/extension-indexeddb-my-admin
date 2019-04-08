@@ -1,4 +1,5 @@
 import Database from './pages/Database.js'
+import EditStore from './pages/EditStore.js'
 import Store from './pages/Store.js'
 import HeaderStore from './components/HeaderStore.js'
 
@@ -28,5 +29,10 @@ export const routes = [
       header: HeaderStore
     },
     children: []
-  }
+  },
+  {
+    path: '/edit/store/:database/:version/:store/',
+    component: EditStore,
+    children: []
+  },
 ]
