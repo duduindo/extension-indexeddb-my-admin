@@ -21,6 +21,11 @@ export default {
 
     chrome.tabs.sendMessage(id, {type: 'GET_DATABASE_STORE', payload: value});
   },
+  fetchUpdateStore(context, value) {
+    const id = context.getters.getID
+
+    chrome.tabs.sendMessage(id, {type: 'UPDATE_DATABASE_STORE', payload: value});
+  },
   searchStoreValues(context, value) {
     let store = context.getters.getStoreFull;
 

@@ -5,15 +5,35 @@ const EditStore = Vue.component('EditStore', {
   data() {
     return {
       cursor: '{}',
+      oldCursor: '{}'
     }
   },
   computed: {
-    ...mapGetters({})
+    ...mapGetters({
+      status: 'getStoreUpdatedStatus'
+    })
   },
   methods: {
-    ...mapActions({}),
+    ...mapActions({
+      fetch: 'fetchUpdateStore'
+    }),
     handleUpdate() {
-      console.log( this.cursor )
+      const { database, store, version } = this.$route.params
+
+      try {
+        const cursor = JSON.parse(this.cursor)
+        const oldCursor = JSON.parse(this.oldCursor)
+
+        this.fetch({
+          name: database,
+          version,
+          store,
+          oldValue: oldCursor,
+          newValue: cursor
+        })
+      } catch(err) {
+        console.error(err)
+      }
     }
   },
   mounted() {
@@ -21,15 +41,16 @@ const EditStore = Vue.component('EditStore', {
     const cursorString = JSON.stringify(cursor)
     const cursorFormatted = window.jsonStringFormatter(cursorString, '  ')
 
-    setTimeout(() => {
-      this.cursor = cursorFormatted
-    }, 2000)
+    this.cursor = cursorFormatted
+    this.oldCursor = cursorString
   },
   render(create) {
+    const self = this
     const rows = this.cursor.match(/\n/g) ? (this.cursor.match(/\n/g).length + 2) : 1;
 
     return create('div', [
       create('h1', 'Edit'),
+      create('h3', `Status: ${this.status}`),
       create('form', [
         create('button', {
           attrs: {
@@ -48,11 +69,11 @@ const EditStore = Vue.component('EditStore', {
             spellcheck: false
           },
           domProps: {
-            value: this.cursor
+            value: self.cursor
           },
           on: {
             input: function (event) {
-              this.$emit('input', event.target.value)
+              self.cursor = event.target.value
             }
           },
           style: {

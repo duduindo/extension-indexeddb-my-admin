@@ -1,4 +1,5 @@
 export default {
   store: {},
-  storeFiltered: {}
+  storeFiltered: {},
+  storeObjectUpdatedStatus: 'waiting'
 }
